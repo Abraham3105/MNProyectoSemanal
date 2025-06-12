@@ -1,16 +1,14 @@
 <?php
+  include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/ProyectoMn/Models/homeModel.php';
 
 
-//Loguear 
 
-//Capturar la funcion de un boton 
 if(isset($_POST["btnIniciarSesion"]))
 {
     $nombreUsuario = $_POST["txtNombreUsuario"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    //Enviamos el nombre de usuario y la contraseña al modelo
-    $respuesta = ValidarInicioSesionModel();
+    $respuesta = ValidarInicioSesionModel($nombreUsuario, $contrasenna);
 
     if($respuesta)
     {
@@ -18,13 +16,9 @@ if(isset($_POST["btnIniciarSesion"]))
     }
     else
     {
-        $_POST["txtMensaje"] = "Su información no es válida correctamente";
+        $_POST["txtMensaje"] = "Su información no fue validada correctamente.";
     }
 }
-
-
-
-//Registrar
 
 if(isset($_POST["btnRegistrarUsuario"]))
 {
@@ -33,7 +27,6 @@ if(isset($_POST["btnRegistrarUsuario"]))
     $nombreUsuario = $_POST["txtNombreUsuario"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    //Enviamos el nombre de usuario y la contraseña al modelo
     $respuesta = RegistrarUsuarioModel($nombre, $correo, $nombreUsuario, $contrasenna);
 
     if($respuesta)
@@ -46,6 +39,9 @@ if(isset($_POST["btnRegistrarUsuario"]))
     }
 }
 
-//Recuperar Acceso
+
+
+
+//Recuperar Acceso
 
 ?>

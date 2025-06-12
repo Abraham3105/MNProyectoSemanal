@@ -1,20 +1,13 @@
 <?php
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Views/layoutExterno.php';
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Controllers/homeController.php';
 ?>
 
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Proyecto MN</title>
-    <link href="../Estilos/style.css" rel="stylesheet">
-</head>
-
+<html>    
+    <?php
+        AddCss();
+    ?>
 <body>
     <div class="main-wrapper">
         <div class="auth-wrapper d-flex no-block justify-content-center align-items-center" style="background:url(../Imagenes/auth-bg.jpg) no-repeat center center;">
@@ -37,7 +30,8 @@
                                         echo '<div class="alert alert-warning text-center">' . $_POST["txtMensaje"] . '</div>';
                                     }
                                 ?>
-                                  <div class="input-group mb-3">
+
+                                <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
@@ -48,7 +42,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input id="txtCorreo" name="txtCorreo" type="text" class="form-control form-control-lg" placeholder="Correo">
+                                    <input id="txtCorreo" name="txtCorreo" type="email" class="form-control form-control-lg" placeholder="Correo">
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -67,7 +61,7 @@
 
                                 <div class="form-group text-center">
                                     <div class="col-xs-12 p-b-20">
-                                        <button id="btnRegistrarUsuario" name="btnIniciarSesion" class="btn btn-block btn-lg btn-info" type="submit">Procesar</button>
+                                        <button id="btnRegistrarUsuario" name="btnRegistrarUsuario" class="btn btn-block btn-lg btn-info" type="submit">Procesar</button>
                                     </div>
                                 </div>
 
@@ -90,9 +84,10 @@
         </div>
     </div>
     
-    <script src="../Funciones/jquery.min.js"></script>
-    <script src="../Funciones/popper.min.js"></script>
-    <script src="../Funciones/bootstrap.min.js"></script>
+    <?php
+        AddJs();
+    ?>    
+
 </body>
 
 </html>
