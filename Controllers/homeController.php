@@ -1,16 +1,14 @@
 <?php
-  include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/ProyectoMn/Models/homeModel.php';
-
-
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Models/homeModel.php';
 
 if(isset($_POST["btnIniciarSesion"]))
 {
-    $nombreUsuario = $_POST["txtNombreUsuario"];
+    $correo = $_POST["txtCorreo"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    $respuesta = ValidarInicioSesionModel($nombreUsuario, $contrasenna);
+    $respuesta = ValidarInicioSesionModel($correo, $contrasenna);
 
-    if($respuesta)
+    if($respuesta != null && $respuesta -> num_rows > 0)
     {
         header("location: ../../Views/Home/principal.php");
     }
@@ -24,10 +22,10 @@ if(isset($_POST["btnRegistrarUsuario"]))
 {
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
-    $nombreUsuario = $_POST["txtNombreUsuario"];
+    $identificacion = $_POST["txtIdentificacion"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    $respuesta = RegistrarUsuarioModel($nombre, $correo, $nombreUsuario, $contrasenna);
+    $respuesta = RegistrarUsuarioModel($nombre, $correo, $identificacion, $contrasenna);
 
     if($respuesta)
     {
@@ -42,6 +40,6 @@ if(isset($_POST["btnRegistrarUsuario"]))
 
 
 
-//Recuperar Acceso
+//Recuperar Acceso
 
 ?>

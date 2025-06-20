@@ -1,32 +1,42 @@
 <?php
-
     include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Models/connect.php';
-    function ValidarInicioSesionModel($nombreUsuario,$contrasenna)
-    {
-        $contex = OpenDB();
 
-        //Interactuar
-
-        CloseDB($contex);
-        return true;
-    }
-
-    function RegiatraUsuarioModel($nombre, $correo, $nombreUsuario, $contrasenna)
+    function ValidarInicioSesionModel($correo, $contrasenna)
     {
         try
         {
-            $contex = mysqli_connect("127.0.0.1:3307","root","","MNDatabase");
+            $context = OpenDB();
 
-            $sp = "CALL RegistrarUsuario('$nombre', '$correo', '$nombreUsuario', '$contrasenna')"
-            $result = $contex -> query($sp);
+            $sp = "CALL ValidarInicioSesion('$correo', '$contrasenna')";
+            $respuesta = $context -> query($sp);
 
-            mysqli_close($contex);
-
+            CloseDB($context);            
             return $respuesta;
         }
         catch(Exception $error)
         {
-            return false; 
+            RegistrarError($error);
+            return null;
         }
     }
+
+    function RegistrarUsuarioModel($nombre, $correo, $identificacion, $contrasenna)
+    {
+        try
+        {
+            $context = OpenDB();
+
+            $sp = "CALL RegistrarUsuario('$nombre', '$correo', '$identificacion', '$contrasenna')";
+            $respuesta = $context -> query($sp);
+
+            CloseDB($context);            
+            return $respuesta;
+        }
+        catch(Exception $error)
+        {
+            RegistrarError($error);
+            return false;
+        }
+    }
+
 ?>
