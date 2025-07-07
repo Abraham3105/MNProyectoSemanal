@@ -1,5 +1,5 @@
 <?php
-    include_once $_SERVER["DOCUMENT_ROOT"] . '/Curso/Models/homeModel.php';
+    include_once $_SERVER["DOCUMENT_ROOT"] . '/ProyectoAmbiente/MNProyectoSemanal/Models/homeModel.php';
 
 if(isset($_POST["btnIniciarSesion"]))
 {
@@ -37,9 +37,33 @@ if(isset($_POST["btnRegistrarUsuario"]))
     }
 }
 
+if(isset($_POST["btnRecuperarAcceso"]))
+{
+    $correo = $_POST["txtCorreo"];
 
+    $respuesta = ValidarCorreoModel($correo);
 
+    if($respuesta != null && $respuesta -> num_rows > 0)
+    {
+        $datos = mysqli_fetch_array($respuesta);
 
-//Recuperar Acceso
+        $contrasenna = generarContrsena(); 
+
+        ActualizarContrasennaModel($datos["IdUsuario"], $contrasenna);
+
+        $mensaje = "<hmtl><body> 
+        Estimado(a) " . $datos["Nombre"] . "<br><br>
+        Se ha generado el siguiente codigo de seguridad:" . $contrasenna . "<br> 
+        Recuerde realizar el cambio de contraseña una vez que ingrese al sistema.
+        </hmtl></body>";
+        //Tomar los datos y enviar el correo electrónico al usuario
+
+        header("location: ../../Views/Home/login.php");
+    }
+    else
+    {
+        $_POST["txtMensaje"] = "Su acceso no fue recuperado correctamente.";
+    }
+}
 
 ?>
